@@ -66,22 +66,8 @@ class App(ctk.CTk):
                  ('Resources', lambda frame=self.resource_frame: self.sel_frame(frame=frame)),
                  ('Settings', lambda frame=self.settings_frame: self.sel_frame(frame=frame))]
         self.nav_bar = NavigationBar(self, pages_list, bg_color=theme['color']['bg2'], theme=theme)
-
-        self.welcome_frame = Welcome(self)
-        self.welcome_frame.pack(side=ctk.BOTTOM, padx=theme['pad'][2], pady=theme['pad'][2], fill=ctk.BOTH, expand=True)
-        self.meme_frame = Meme(master=self.welcome_frame, parent_geometry=(self.height * 0.5, self.height * 0.5))
-        self.meme_frame.pack(side=ctk.BOTTOM, padx=theme['pad'][2], pady=theme['pad'][2], fill=ctk.BOTH, expand=True)
-        self.ticker_frame = TickerSearch(self)
-        self.settings_frame = Settings(self)
-        self.account_frame = AccountManagement(self)
-
-        # layout
-        pages = [('Tickers', lambda frame=self.ticker_frame: self.sel_frame(frame=frame)),
-                 ('Accounts', lambda frame=self.account_frame: self.sel_frame(frame=frame)),
-                 ('Settings', lambda frame=self.settings_frame: self.sel_frame(frame=frame))]
-        self.nav_bar = NavigationBar(self, pages, bg_color=theme['color']['bg2'])
-
         self.nav_bar.pack(anchor=ctk.NW, side=ctk.TOP, fill=ctk.X)
+        
         if len(fav_tickers) > 0:
             self.fav_tickers = FavTickers(
                 open_settings=lambda frame=self.settings_frame: self.sel_frame(frame=frame),
