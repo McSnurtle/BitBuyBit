@@ -1,0 +1,20 @@
+Setting up / pushing to git from Git Bash or CMD:
+
+```bash
+git init
+git add .  // add everything to commit
+git commit -m "Initial Commit"
+git branch -M main  // initialize main branch
+git branch -M experimental  // initialize experimental branch to use to push untested code, should use a temp fork but whatever
+git remote add origin https://github.com/McSnurtle/reponame.git  // add origin called 'origin'
+git push -u origin main  // push current commit to branch 'main' using ref 'origin'
+```
+
+Pushing to git via terminal:
+
+```bash
+git add ./file/to/commit
+git commit -m "Commit Name"
+git pull
+git push -u ref-name branch-name
+```
