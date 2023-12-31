@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module type="PYTHON_MODULE" version="4">
+<module version="4">
   <component name="NewModuleRootManager">
-    <content url="file://$MODULE_DIR$">
-      <excludeFolder url="file://$MODULE_DIR$/venv" />
-    </content>
-<<<<<<< HEAD
-    <orderEntry type="inheritedJdk" />
-=======
-<<<<<<< HEAD
-    <orderEntry type="jdk" jdkName="Python 3.11 (BitBuyBit-master)" jdkType="Python SDK" />
-=======
-    <orderEntry type="inheritedJdk" />
->>>>>>> 45df07cbdb85472cdadf842c5e80b0cd4c95ddc3
->>>>>>> 2b7be910f8dba4fa842ad7415db4844ba8062aa2
+    <orderEntry type="jdk" jdkName="Python 3.10 (BitBuyBit)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
