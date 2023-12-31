@@ -1,20 +1,7 @@
 # imports - tickers.py, a CTkFrame to search and launch chart views of symbols
 import customtkinter as ctk
 import exchange
-<<<<<<< HEAD
-
-
-class TickerSearch(ctk.CTkFrame):
-    def __init__(self, master, theme, fav_tickers: list, *args, **kwargs):
-        super().__init__(master, *args, **kwargs)
-        self.theme = theme
-        self.id = 'ticker_search'
-        self.deprecated = None  # used to prevent some IDE's from complaining about errors when handling tkinter event's. i.e. self.search_tickers()
-=======
-import requests
-import threading
-import chart
-from pages.base_frame import BaseFrame
+from base_frame import BaseFrame
 
 
 class TickerSearch(BaseFrame):
@@ -25,18 +12,14 @@ class TickerSearch(BaseFrame):
         self.id = 'ticker_search'
         self.deprecated = None  # used to prevent some IDE's from complaining about errors when handling tkinter
         # event's. i.e. self.search_tickers()
->>>>>>> 2b7be910f8dba4fa842ad7415db4844ba8062aa2
         self.results = None
         self.results_frame = ctk.CTkScrollableFrame(self)
         self.results_frame.pack(fill=ctk.BOTH, expand=True, side=ctk.BOTTOM, anchor=ctk.SW, padx=self.theme['pad'][2],
                                 pady=self.theme['pad'][2])
         self.label = ctk.CTkLabel(self, text='Tickers')
         self.label.pack(anchor=ctk.NW, padx=self.theme['pad'][1], pady=self.theme['pad'][1], side=ctk.LEFT)
-<<<<<<< HEAD
         self.search = ctk.CTkEntry(self, placeholder_text='e.g. BTCUSDT, ETH, Ethereum, AAPL, crypto')
-=======
         self.search = ctk.CTkEntry(self, placeholder_text='e.g. BTC-USD, AAPL, MARA')
->>>>>>> 2b7be910f8dba4fa842ad7415db4844ba8062aa2
         self.search.bind("<Return>", self.search_tickers)  # any key_press will update search
         self.search.pack(anchor=ctk.NW, padx=self.theme['pad'][1], pady=self.theme['pad'][1], side=ctk.LEFT, fill=ctk.X,
                          expand=True)
@@ -98,34 +81,21 @@ class TickerSearch(BaseFrame):
             self.results_widgets.append(chart_button)
 
     def decide_chart(self, results):
-<<<<<<< HEAD
-        if charting_opt['legacy']:
-=======
         if self.charting_opt['legacy']:
->>>>>>> 2b7be910f8dba4fa842ad7415db4844ba8062aa2
             self.launch_chart_legacy(results)
             return
         self.launch_chart(results)
 
     def launch_chart_legacy(self, results):
-<<<<<<< HEAD
-        chart_view = chart.ChartViewLegacy(results['symbol'], charting_opt['rounding'])
-=======
         chart_view = chart.ChartViewLegacy(results['symbol'], self.charting_opt['rounding'])
->>>>>>> 2b7be910f8dba4fa842ad7415db4844ba8062aa2
         self.deprecated = chart_view.finish()
 
     def launch_chart(self, results=None):
         response = results
         if type(response) is None:
             response = self.results
-<<<<<<< HEAD
-        chart_view = chart.ChartView(response['symbol'], charting_opt['rounding'], charting_opt['live'])
-        if charting_opt['async']:
-=======
         chart_view = chart.ChartView(response['symbol'], self.charting_opt['rounding'], self.charting_opt['live'])
         if self.charting_opt['async']:
->>>>>>> 2b7be910f8dba4fa842ad7415db4844ba8062aa2
             chart_thread = threading.Thread(target=lambda: chart_view.show(block=True))
             chart_thread.start()
         else:
