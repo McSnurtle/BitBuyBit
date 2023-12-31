@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< HEAD
   <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.10 (BitBuyBit)" project-jdk-type="Python SDK" />
+=======
+<<<<<<< HEAD
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.11 (BitBuyBit-master)" project-jdk-type="Python SDK" />
+=======
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.10 (BitBuyBit)" project-jdk-type="Python SDK" />
+>>>>>>> 45df07cbdb85472cdadf842c5e80b0cd4c95ddc3
+>>>>>>> 2b7be910f8dba4fa842ad7415db4844ba8062aa2
 </project>

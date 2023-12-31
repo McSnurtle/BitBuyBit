@@ -3,6 +3,10 @@ import customtkinter as ctk
 import random
 import os
 from PIL import Image
+<<<<<<< HEAD
+=======
+from pages.base_frame import BaseFrame
+>>>>>>> 2b7be910f8dba4fa842ad7415db4844ba8062aa2
 
 
 class Meme(ctk.CTkLabel):

@@ -1,6 +1,12 @@
 # imports - resources.py, a reference page for users to navigate outside BitBuyBit
 import customtkinter as ctk
 import json
+<<<<<<< HEAD
+=======
+import webbrowser
+from pages.base_frame import BaseFrame
+from popup import Dialog
+>>>>>>> 2b7be910f8dba4fa842ad7415db4844ba8062aa2
 
 with open('./assets/user-references.json', 'r') as fp:
     user_references: list[list] = json.load(fp)
@@ -34,7 +40,11 @@ def visit_reference(link: str):
         webbrowser.open(link, new=0, autoraise=False)
 
 
+<<<<<<< HEAD
 class ResourcesPage(ctk.CTkFrame):
+=======
+class ResourcesPage(BaseFrame):
+>>>>>>> 2b7be910f8dba4fa842ad7415db4844ba8062aa2
     def __init__(self, master, theme: dict, *args, **kwargs):
         super().__init__(master, *args, **kwargs)
         self.id = 'accounts'
@@ -54,8 +64,13 @@ class ResourcesPage(ctk.CTkFrame):
         self.user_frame = ctk.CTkFrame(self)
         for reference in user_references:
             reference_frame = ctk.CTkFrame(self.user_frame)
+<<<<<<< HEAD
             reference_frame.pack(padx=theme['pad'][1], pady=theme['pad'][1], anchor=ctk.W, fill=ctk.X)
             reference_link = ctk.CTkLabel(reference_frame, text=reference[1], font=theme['font']['normal'])
+=======
+            reference_frame.pack(padx=theme['pad'][1], pady=theme['pad'][1], anchor=ctk.W, fill=ctk.X, expand=True)
+            reference_link = ctk.CTkEntry(reference_frame, placeholder_text=reference[1], font=theme['font']['normal'])
+>>>>>>> 2b7be910f8dba4fa842ad7415db4844ba8062aa2
             reference_link.pack(padx=theme['pad'][1], side=ctk.BOTTOM, anchor=ctk.NW)
             reference_title = ctk.CTkEntry(reference_frame, placeholder_text=reference[0],
                                            font=theme['font']['subtitle'])
@@ -67,7 +82,11 @@ class ResourcesPage(ctk.CTkFrame):
                                           command=lambda: remove_reference(title=reference_title.get(),
                                                                            link=reference_link.get()))
             remove_button.pack(padx=theme['pad'][1], pady=theme['pad'][1], side=ctk.RIGHT)
+<<<<<<< HEAD
             visit_button = ctk.CTkButton(reference_frame, text="Save",
+=======
+            visit_button = ctk.CTkButton(reference_frame, text="Visit",
+>>>>>>> 2b7be910f8dba4fa842ad7415db4844ba8062aa2
                                          command=lambda: visit_reference(link=reference_link.get()))
             visit_button.pack(padx=theme['pad'][1], pady=theme['pad'][1], side=ctk.RIGHT)
             reference_title.pack(padx=theme['pad'][1], pady=(theme['pad'][1], 0), side=ctk.LEFT, anchor=ctk.W,

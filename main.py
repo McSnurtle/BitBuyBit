@@ -5,12 +5,16 @@ import os
 import time
 import sys
 import json
+<<<<<<< HEAD
 import random
 import threading
 import customtkinter as ctk
 import requests
 from tkinter import PhotoImage
 from PIL import Image, ImageTk
+=======
+import customtkinter as ctk
+>>>>>>> 2b7be910f8dba4fa842ad7415db4844ba8062aa2
 from dotenv import load_dotenv
 
 from pages.meme import Meme
@@ -18,9 +22,23 @@ from pages.tickers import TickerSearch
 from pages.welcome import Welcome
 from pages.settings import Settings
 from pages.resources import ResourcesPage
+<<<<<<< HEAD
 from bars.fav_tickers import FavTickers
 from bars.navigation import NavigationBar
 from popup import CreateToolTip, Dialog, popup
+=======
+from pages.base_frame import BaseFrame, BaseScrollableFrame
+from bars.fav_tickers import FavTickers
+from bars.navigation import NavigationBar
+from popup import popup
+
+import random
+import threading
+import requests
+from tkinter import PhotoImage
+from PIL import Image, ImageTk
+from dotenv import load_dotenv
+>>>>>>> 2b7be910f8dba4fa842ad7415db4844ba8062aa2
 
 import chart
 import exchange
@@ -51,6 +69,7 @@ class App(ctk.CTk):
 
         self.welcome_frame = Welcome(self, theme)
         self.welcome_frame.pack(side=ctk.BOTTOM, padx=theme['pad'][2], pady=theme['pad'][2], fill=ctk.BOTH, expand=True)
+<<<<<<< HEAD
         self.meme_frame = Meme(master=self.welcome_frame, proj_dir=proj_dir, parent_geometry=(self.height * 0.5, self.height * 0.5))
         self.meme_frame.pack(side=ctk.BOTTOM, padx=theme['pad'][2], pady=theme['pad'][2], fill=ctk.BOTH, expand=True)
         self.ticker_frame = TickerSearch(self, theme, fav_tickers)
@@ -73,6 +92,39 @@ class App(ctk.CTk):
 
         self.update_time()
 
+=======
+        self.meme_frame = Meme(master=self.welcome_frame, proj_dir=proj_dir,
+                               parent_geometry=(self.height * 0.5, self.height * 0.5))
+        self.meme_frame.pack(side=ctk.BOTTOM, padx=theme['pad'][2], pady=theme['pad'][2], fill=ctk.BOTH, expand=True)
+        self.ticker_frame = TickerSearch(self, theme, charting_opt, fav_tickers)
+        self.settings_frame = Settings(self, theme, fav_tickers, charting_opt, self.exit_gracefully)
+        self.resource_frame = ResourcesPage(self, theme)
+
+        # layout
+        pages_list = [('Tickers', lambda frame=self.ticker_frame: self.sel_frame(frame=frame)),
+                 ('Resources', lambda frame=self.resource_frame: self.sel_frame(frame=frame)),
+                 ('Settings', lambda frame=self.settings_frame: self.sel_frame(frame=frame))]
+        self.nav_bar = NavigationBar(self, pages_list, bg_color=theme['color']['bg2'], theme=theme)
+        self.nav_bar.pack(anchor=ctk.NW, side=ctk.TOP, fill=ctk.X)
+        
+        if len(fav_tickers) > 0:
+            self.fav_tickers = FavTickers(
+                open_settings=lambda frame=self.settings_frame: self.sel_frame(frame=frame),
+
+                exit_func=self.exit_gracefully, fav_tickers=fav_tickers, theme=theme, master=self)
+            self.fav_tickers.pack(anchor=ctk.NW, side=ctk.TOP, fill=ctk.X)
+
+        self.frames: list[BaseFrame | BaseScrollableFrame] = [self.welcome_frame, self.ticker_frame,
+                                                              self.resource_frame, self.settings_frame]
+
+        self.update_time()
+
+    def exit_gracefully(self):
+        self.fav_tickers.updating = False
+        self.destroy()
+        exit(0)
+
+>>>>>>> 2b7be910f8dba4fa842ad7415db4844ba8062aa2
     def update_time(self):
         self.nav_bar.time_label.configure(text=f"{time.strftime('%H:%M:%S')}")
         self.nav_bar.time_label.after(1000, self.update_time)  # after 1 second...

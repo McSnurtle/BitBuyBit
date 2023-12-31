@@ -61,7 +61,11 @@ class ChartView(lwc.Chart):
     def update_interval(self, chart):
         data = exchange.get_historical(symbol=self.symbol, interval=self.topbar['Interval'].value, rounding=self.rounding)
         chart.set(data,
+<<<<<<< HEAD
                   False)  # render_drawings re-renders user-drawings at the new scale to prevent them from being deleted
+=======
+                  True)  # render_drawings re-renders user-drawings at the new scale to prevent them from being deleted
+>>>>>>> 2b7be910f8dba4fa842ad7415db4844ba8062aa2
 
 
 class ChartViewLegacy(ctk.CTkToplevel):

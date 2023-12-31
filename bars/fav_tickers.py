@@ -1,5 +1,6 @@
 # imports - fav_tickers.py, a simple ticker bar with users favourite tickers loaded from .json files
 import customtkinter as ctk
+<<<<<<< HEAD
 
 
 class FavTickers(ctk.CTkFrame):
@@ -7,6 +8,23 @@ class FavTickers(ctk.CTkFrame):
         super().__init__(*args, **kwargs)
         self.id = 'fav_tickers'
         if len(fav_tickers) > 0:
+=======
+import threading
+import exchange
+import json
+import time
+from popup import popup
+
+
+class FavTickers(ctk.CTkFrame):
+    def __init__(self, open_settings, fav_tickers, exit_func, theme: dict, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.id = 'fav_tickers'
+        self.exit_gracefully = exit_func
+        self.theme = theme
+        self.fav_tickers = fav_tickers
+        if len(self.fav_tickers) > 0:
+>>>>>>> 2b7be910f8dba4fa842ad7415db4844ba8062aa2
             self.front_frame = ctk.CTkFrame(self)
             self.front_frame.pack(fill=ctk.X)
             self.ticker_labels: list[
@@ -16,7 +34,11 @@ class FavTickers(ctk.CTkFrame):
             self.threads: list[threading.Thread] = []
             self.deprecated = None
 
+<<<<<<< HEAD
             for ticker in fav_tickers:
+=======
+            for ticker in self.fav_tickers:
+>>>>>>> 2b7be910f8dba4fa842ad7415db4844ba8062aa2
                 try:
                     price = exchange.get_symbol_price(ticker)
                 except KeyError:
@@ -24,9 +46,15 @@ class FavTickers(ctk.CTkFrame):
                         price = exchange.get_crypto_price(ticker)
                     except KeyError:
                         price = 0
+<<<<<<< HEAD
                         fav_tickers.remove(ticker)
                         with open('./fav_tick.json', 'w') as file:
                             content = json.dumps(fav_tickers)
+=======
+                        self.fav_tickers.remove(ticker)
+                        with open('./fav_tick.json', 'w') as file:
+                            content = json.dumps(self.fav_tickers)
+>>>>>>> 2b7be910f8dba4fa842ad7415db4844ba8062aa2
                             file.write(content)
                         dialog = popup("Ticker Warning",
                                        f"AY! One of your favourited tickers ('{ticker}') is unavailable for live pricing\n"
@@ -40,22 +68,39 @@ class FavTickers(ctk.CTkFrame):
                         exit_gracefully()
                         # dialog.mainloop()
                 ticker_frame = ctk.CTkFrame(self.front_frame)
+<<<<<<< HEAD
                 ticker_title = ctk.CTkLabel(ticker_frame, text=ticker, font=theme['font']['normal'])
                 ticker_title.pack(side=ctk.LEFT, anchor=ctk.NW, padx=theme['pad'][1], pady=theme['pad'][1])
                 ticker_price = ctk.CTkLabel(ticker_frame, text=f"{'{:,.3f}'.format(price)}=",
                                             font=theme['font']['normal'])
                 ticker_price.pack(side=ctk.LEFT, anchor=ctk.NW, padx=theme['pad'][1], pady=theme['pad'][1])
+=======
+                ticker_title = ctk.CTkLabel(ticker_frame, text=ticker, font=self.theme['font']['normal'])
+                ticker_title.pack(side=ctk.LEFT, anchor=ctk.NW, padx=self.theme['pad'][1], pady=self.theme['pad'][1])
+                ticker_price = ctk.CTkLabel(ticker_frame, text=f"{'{:,.3f}'.format(price)}=",
+                                            font=self.theme['font']['normal'])
+                ticker_price.pack(side=ctk.LEFT, anchor=ctk.NW, padx=self.theme['pad'][1], pady=self.theme['pad'][1])
+>>>>>>> 2b7be910f8dba4fa842ad7415db4844ba8062aa2
                 self.ticker_labels.append((ticker, ticker_price, price))
                 update_thread = threading.Thread(target=lambda: self.update_tickers(
                     index=self.ticker_labels.index((ticker, ticker_price, price))))
                 self.threads.append(update_thread)
                 update_thread.start()
+<<<<<<< HEAD
                 ticker_frame.pack(side=ctk.LEFT, padx=theme['pad'][1], pady=theme['pad'][1])
 
             self.config_button = ctk.CTkButton(self.front_frame, text="Manage Tickers", command=self.settings_redirect)
             self.config_button.pack(side=ctk.RIGHT, padx=theme['pad'][1], pady=theme['pad'][1])
             self.notice_label = ctk.CTkLabel(self.front_frame, text='Live (60s)', font=theme['font']['normal'])
             self.notice_label.pack(side=ctk.RIGHT, padx=theme['pad'][1], pady=theme['pad'][1])
+=======
+                ticker_frame.pack(side=ctk.LEFT, padx=self.theme['pad'][1], pady=self.theme['pad'][1])
+
+            self.config_button = ctk.CTkButton(self.front_frame, text="Manage Tickers", command=self.settings_redirect)
+            self.config_button.pack(side=ctk.RIGHT, padx=self.theme['pad'][1], pady=self.theme['pad'][1])
+            self.notice_label = ctk.CTkLabel(self.front_frame, text='Live (60s)', font=self.theme['font']['normal'])
+            self.notice_label.pack(side=ctk.RIGHT, padx=self.theme['pad'][1], pady=self.theme['pad'][1])
+>>>>>>> 2b7be910f8dba4fa842ad7415db4844ba8062aa2
 
     def update_tickers(self, index):
         try:
