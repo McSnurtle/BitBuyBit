@@ -1,7 +1,7 @@
 # imports - tickers.py, a CTkFrame to search and launch chart views of symbols
 import customtkinter as ctk
 import exchange
-from base_frame import BaseFrame
+from pages.base_frame import BaseFrame
 
 
 class TickerSearch(BaseFrame):

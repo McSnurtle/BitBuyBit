@@ -1,6 +1,5 @@
 # main.py - a rudimentary exchange interface using Binance API to trade, by Mc_Snurtle
 # imports
-import datetime
 import os
 import time
 import sys
@@ -12,21 +11,13 @@ from pages.meme import Meme
 from pages.tickers import TickerSearch
 from pages.welcome import Welcome
 from pages.settings import Settings
-from pages.resources import ResourcesPage
 from pages.base_frame import BaseFrame, BaseScrollableFrame
 from bars.fav_tickers import FavTickers
 from bars.navigation import NavigationBar
 from popup import popup
 
-import random
-import threading
-import requests
-from tkinter import PhotoImage
-from PIL import Image, ImageTk
 from dotenv import load_dotenv
 
-import chart
-import exchange
 
 
 class App(ctk.CTk):
@@ -58,14 +49,12 @@ class App(ctk.CTk):
                                parent_geometry=(self.height * 0.5, self.height * 0.5))
         self.meme_frame.pack(side=ctk.BOTTOM, padx=theme['pad'][2], pady=theme['pad'][2], fill=ctk.BOTH, expand=True)
         self.ticker_frame = TickerSearch(self, theme, charting_opt, fav_tickers)
-        self.settings_frame = Settings(self, theme, fav_tickers, charting_opt, self.exit_gracefully)
-        self.resource_frame = ResourcesPage(self, theme)
+        self.settings_frame = Settings(master=self, theme=theme, fav_tickers=fav_tickers, charting_opt=charting_opt, exit_func=self.exit_gracefully)
 
         # layout
         pages_list = [('Tickers', lambda frame=self.ticker_frame: self.sel_frame(frame=frame)),
-                      ('Resources', lambda frame=self.resource_frame: self.sel_frame(frame=frame)),
                       ('Settings', lambda frame=self.settings_frame: self.sel_frame(frame=frame))]
-        self.nav_bar = NavigationBar(self, pages_list, bg_color=theme['color']['bg2'], theme=theme)
+        self.nav_bar = NavigationBar(self, pages_list, bg_color=theme['color']['bg2'], theme=theme, quotes=quotes)
         self.nav_bar.pack(anchor=ctk.NW, side=ctk.TOP, fill=ctk.X)
 
         if len(fav_tickers) > 0:
@@ -76,7 +65,7 @@ class App(ctk.CTk):
             self.fav_tickers.pack(anchor=ctk.NW, side=ctk.TOP, fill=ctk.X)
 
         self.frames: list[BaseFrame | BaseScrollableFrame] = [self.welcome_frame, self.ticker_frame,
-                                                              self.resource_frame, self.settings_frame]
+                                                              self.settings_frame]
 
         self.update_time()
 

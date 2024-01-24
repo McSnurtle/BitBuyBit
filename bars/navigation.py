@@ -1,17 +1,10 @@
 # imports - navigation.py, a simple navigation bar to get around BitBuyBit
 import customtkinter as ctk
-<<<<<<< HEAD
-=======
 import random
-import json
-
-with open('assets/quotes.json', 'r') as fp:
-    quotes = json.load(fp)
->>>>>>> 2b7be910f8dba4fa842ad7415db4844ba8062aa2
 
 
 class NavigationBar(ctk.CTkFrame):
-    def __init__(self, master, pages, theme, *args, **kwargs):
+    def __init__(self, master, pages, theme, quotes, *args, **kwargs):
         super().__init__(master, *args, **kwargs)
         self.id = 'nav_bar'
 

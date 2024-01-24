@@ -2,10 +2,8 @@
 # imports
 import pandas
 import yfinance as yf
-import time
 import requests
-import json
-from datetime import datetime, timedelta, date
+from datetime import timedelta, date
 
 # yfinance pypi / docs can be found here: https://pypi.org/project/yfinance/
 price_url = 'https://min-api.cryptocompare.com/data/price?fsym={0}&tsyms=USD'

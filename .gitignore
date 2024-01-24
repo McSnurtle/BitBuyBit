@@ -1,2 +1,5 @@
-venv/
+/_pycache_
+/venv
 .git-setup.txt
+/.vs
+/.vscode
