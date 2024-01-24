@@ -2,6 +2,9 @@
 import customtkinter as ctk
 import exchange
 from pages.base_frame import BaseFrame
+import threading
+import requests
+import chart
 
 
 class TickerSearch(BaseFrame):
@@ -20,7 +23,7 @@ class TickerSearch(BaseFrame):
         self.label.pack(anchor=ctk.NW, padx=self.theme['pad'][1], pady=self.theme['pad'][1], side=ctk.LEFT)
         self.search = ctk.CTkEntry(self, placeholder_text='e.g. BTCUSDT, ETH, Ethereum, AAPL, crypto')
         self.search = ctk.CTkEntry(self, placeholder_text='e.g. BTC-USD, AAPL, MARA')
-        self.search.bind("<Return>", self.search_tickers)  # any key_press will update search
+        self.search.bind("<Return>", self.search_tickers)
         self.search.pack(anchor=ctk.NW, padx=self.theme['pad'][1], pady=self.theme['pad'][1], side=ctk.LEFT, fill=ctk.X,
                          expand=True)
         self.search_button = ctk.CTkButton(self, text='Search', command=self.search_tickers)
